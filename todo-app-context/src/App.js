@@ -1,51 +1,14 @@
-import { nanoid } from "nanoid";
 import { useState, createContext, useContext } from "react";
 import { FiTrash, FiPlus } from "react-icons/fi";
-
-
-const AppContext = createContext(null)
+import { AppContext, TodoProvider } from "./TodoContext";
 
 const App = () => {
 
-  const [todos, setTodos] = useState(() => JSON.parse(localStorage.getItem("todos")) || []);
   const [newTask, setNewTask] = useState("");
-
-  const addTodos = (task) => {
-    const todo = { id: nanoid(), task, completed: false };
-    setTodos((prevTodos) => {
-      const newTodo = [todo, ...prevTodos];
-      localStorage.setItem("todos", JSON.stringify(newTodo));
-      return newTodo;
-    });
-    console.log(todos)
-  }
-
-  const complete = (todoId) => {
-    setTodos(prev => {
-      const updatedTask = prev.map((x) => x.id === todoId ? { ...x, completed: !x.completed } : x);
-      localStorage.setItem("todos", JSON.stringify(updatedTask));
-      return updatedTask;
-    });
-  }
-
-  const deleteTodos = (todoId) => {
-    setTodos(prev => {
-      const deleteTask = prev.filter((x) => x.id !== todoId);
-      localStorage.setItem("todos", JSON.stringify(deleteTask));
-      return deleteTask;
-    });
-  }
-
-  const editTask = (todoId, task) => {
-    setTodos(prev => { 
-      const editTask = prev.map((x) => x.id === todoId ? {...x, task } : x)
-      localStorage.setItem("todos", JSON.stringify(editTask));
-      return editTask;
-  })
-  }
+  const {todos, addTodos, complete, deleteTodos, editTask} = useContext(AppContext)
 
   return (
-    <AppContext.Provider value={{todos, setTodos}} >
+    <div>
       <div className="flex flex-col justify-center items-center h-screen bg-pink-300 overflow-y-scroll">
         <h1 className="text-green-900 opacity-30 text-9xl content-center">
           todos
@@ -99,7 +62,7 @@ const App = () => {
           );
         })}
       </div>
-    </AppContext.Provider>
+      </div>
   );
 }
 
