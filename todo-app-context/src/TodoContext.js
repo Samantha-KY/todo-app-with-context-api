@@ -9,29 +9,28 @@ export const TodoProvider = ({children}) => {
   const addTodos = (task) => {
     const todo = { id: nanoid(), task, completed: false };
     setTodos((prevTodos) => {
-      const newTodo = [todo, ...prevTodos];
-      return newTodo;
+      const newTodos = [todo, ...prevTodos];
+      return newTodos;
     });
-    console.log(todos)
   }
 
   const complete = (todoId) => {
     setTodos(prev => {
-      const updatedTask = prev.map((x) => x.id === todoId ? { ...x, completed: !x.completed } : x);
+      const updatedTask = prev.map((task) => task.id === todoId ? { ...task, completed: !task.completed } : task);
       return updatedTask;
     });
   }
 
   const deleteTodos = (todoId) => {
     setTodos(prev => {
-      const deleteTask = prev.filter((x) => x.id !== todoId);
+      const deleteTask = prev.filter((task) => task.id !== todoId);
       return deleteTask;
     });
   }
 
   const editTask = (todoId, task) => {
     setTodos(prev => { 
-      const editTask = prev.map((x) => x.id === todoId ? {...x, task } : x)
+      const editTask = prev.map((task) => task.id === todoId ? {...task, task } : task)
       return editTask;
   })
   }
