@@ -1,6 +1,6 @@
-import { useState, createContext, useContext } from "react";
+import { useState,useContext } from "react";
 import { FiTrash, FiPlus } from "react-icons/fi";
-import { AppContext, TodoProvider } from "./TodoContext";
+import { AppContext} from "./TodoContext";
 
 const App = () => {
 

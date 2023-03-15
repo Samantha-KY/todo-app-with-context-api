@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import { createContext, useState } from "react";
 import { nanoid } from "nanoid";
 
 export const AppContext = createContext(null)
